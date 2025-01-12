@@ -188,7 +188,9 @@ function onCollide(player, tile) {
             newImage = this.add.sprite(player.x, player.y, 'newImage');
             newImage.setOrigin(0.5, 0.5); 
             newImage.play('newImage');
+            newImage.setDepth(0)
         }
+        player.setDepth(1);
     }
 }
 </script>
