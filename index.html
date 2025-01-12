@@ -48,8 +48,10 @@ function preload() {
         frameWidth: 32,
         frameHeight: 20
     });
-
-    this.load.image('newImage', 'assets/testBackgroundSpriteSheet.png');
+    this.load.spritesheet('newImage', 'assets/testBackgroundSpriteSheet.png', {
+        frameWidth: 630, 
+        frameHeight: 500 
+    });
 }
 
 function create() {
@@ -120,6 +122,12 @@ function create() {
         repeat: -1
     });
 
+    this.anims.create({
+        key: 'newImage',
+        frames: this.anims.generateFrameNumbers('newImage', { start: 0, end: 80 }),
+        frameRate: 8, // Adjust frame rate as needed
+        repeat: -1 // Loop the animation indefinitely
+    });
   
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -177,8 +185,9 @@ function drawCollisionBoxes() {
 function onCollide(player, tile) {
     if (tile.index === 461) {  
         if (!newImage) {
-            newImage = this.add.image(player.x, player.y, 'newImage');
+            newImage = this.add.sprite(player.x, player.y, 'newImage');
             newImage.setOrigin(0.5, 0.5); 
+            newImage.play('newImage');
         }
     }
 }
